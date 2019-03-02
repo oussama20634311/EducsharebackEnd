@@ -60,6 +60,13 @@
 			<artifactId>postgresql</artifactId>
 			<version>9.4-1201-jdbc4</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-dbcp2</artifactId>
+			<version>${commons-dbcp2.version}</version>
+			<scope>compile</scope>
+		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
 		 <dependency>
@@ -84,10 +91,8 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
 	<build>
 		<plugins>
-
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
@@ -104,7 +109,7 @@
         </configuration>
            </plugin>
 
-		<plugin>
+		<!-- <plugin>
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
@@ -120,10 +125,10 @@
 									<directory>C:\Users\Oussama\Desktop\Angular\educshare\dist\EducShare</directory>
 								</resource>
 							</resources>
-						</configuration>
+						</configuration>  
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 		</plugins>
 	</build>
