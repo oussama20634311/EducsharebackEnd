@@ -18,8 +18,10 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.transaction.annotation.Transactional;
 
 
 @Entity
@@ -47,6 +49,8 @@ public class Document {
 	private String documentFileCorrige;
 	
 	@Lob
+//	@Type(type="org.hibernate.type.PrimitiveByteArrayBlobType")
+	@Column(length=1000000)
     private byte[] enonceData;	
 	@Lob
     private byte[] corrigeData;

@@ -73,6 +73,11 @@ public class Favori {
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
+
+	public Favori orElseThrow(Object object) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 	
 

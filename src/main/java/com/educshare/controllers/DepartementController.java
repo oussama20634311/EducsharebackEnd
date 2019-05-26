@@ -26,22 +26,22 @@ public class DepartementController {
 	@Autowired
 	DepartementRepository departementRepository;
 
-	@GetMapping(value="/departments")
+	@GetMapping("/departments")
 	public List<Departement> getAllDepartements() {
 		return (List<Departement>) departementRepository.findAll();
 	}
 
-	@PostMapping(value="/departments")
+	@PostMapping("/departments")
 	public Departement createDepartement(@Valid @RequestBody Departement departement) {
 		return departementRepository.save(departement);
 	}
 
-	@GetMapping(value="/departments/{id}")
+	@GetMapping("/departments/{id}")
 	public Departement getDepartementById(@PathVariable(value = "id") Long DepartementId) {
 		return departementRepository.findById(DepartementId).orElseThrow(() -> new ResourceNotFoundException());
 	}
 
-	@PutMapping(value="/departments/{id}/edit")
+	@PutMapping("/departments/{id}/edit")
 	public Departement updateDepartement(@PathVariable(value = "id") Long DepartementId,
 			@Valid @RequestBody Departement DepartementDetails) {
 
@@ -54,7 +54,7 @@ public class DepartementController {
 		return updatedDepartement;
 	}
 
-	@DeleteMapping(value="/departments/{id}")
+	@DeleteMapping("/departments/{id}")
 	public ResponseEntity<?> deleteDepartement(@PathVariable(value = "id") Long DepartementId) {
 		Departement Departement = departementRepository.findById(DepartementId)
 				.orElseThrow(() -> new ResourceNotFoundException());

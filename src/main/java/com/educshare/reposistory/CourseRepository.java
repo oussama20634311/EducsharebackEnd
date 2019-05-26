@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import com.educshare.entities.Course;
 
-@RepositoryRestResource
+@Repository
 public interface CourseRepository extends JpaRepository<Course, Long> {
 
 }

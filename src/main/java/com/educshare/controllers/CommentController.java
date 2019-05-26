@@ -19,29 +19,27 @@ import org.springframework.web.bind.annotation.RestController;
 import com.educshare.entities.Comment;
 import com.educshare.reposistory.CommentRepository;
 
-
-
 @RestController
-//@RequestMapping("/")
+@CrossOrigin("*")
 public class CommentController {
 
 	@Autowired
 	CommentRepository commentRepository;
 
-	@GetMapping(value="/comments")
+	@GetMapping("/comments")
 	public List<Comment> getAllComments() {
 		return (List<Comment>) commentRepository.findAll();
 	}
 
 		
-	@PostMapping(value="/comments")
+	@PostMapping("/comments")
 	@ResponseBody
 	public Comment createComment(@Valid @RequestBody Comment comment) {
 		
 		return commentRepository.save(comment);
 	}
 	
-	@GetMapping(value="/comments/{id}")
+	@GetMapping("/comments/{id}")
 	public Comment getCommentById(@PathVariable(value = "id") Long CommentId) {
 		return commentRepository.findById(CommentId)
 				.orElseThrow(() -> new ResourceNotFoundException());
@@ -49,7 +47,7 @@ public class CommentController {
 
 	
 	// Delete a Comment
-	@DeleteMapping(value="/comments/{id}")
+	@DeleteMapping("/comments/{id}")
 	public ResponseEntity<?> deleteComment(@PathVariable(value = "id") Long CommentId) {
 		Comment Comment = commentRepository.findById(CommentId)
 				.orElseThrow(() -> new ResourceNotFoundException());

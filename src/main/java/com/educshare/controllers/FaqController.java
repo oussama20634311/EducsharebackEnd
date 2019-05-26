@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,24 +19,25 @@ import com.educshare.entities.Faq;
 import com.educshare.reposistory.FaqRepository;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class FaqController {
 
 	@Autowired
 	FaqRepository faqRepository;
 
 
-	@GetMapping(value="/faqs")
+	@GetMapping("/faqs")
 	public List<Faq> getAllFaqs() {
 		return (List<Faq>) faqRepository.findAll();
 	}
 
 		
-	@PostMapping(value="/faqs")
+	@PostMapping("/faqs")
 	public Faq createFaq(@Valid @RequestBody Faq faq) {
 		return faqRepository.save(faq);
 	}
 	
-	@GetMapping(value="/faqs/{id}")
+	@GetMapping("/faqs/{id}")
 	public Faq getFaqById(@PathVariable(value = "id") Long FaqId) {
 		return faqRepository.findById(FaqId)
 				.orElseThrow(() -> new ResourceNotFoundException());
@@ -43,7 +45,7 @@ public class FaqController {
 
 	
 	// Delete a Faq
-	@DeleteMapping(value="/faqs/{id}")
+	@DeleteMapping("/faqs/{id}")
 	public ResponseEntity<?> deleteFaq(@PathVariable(value = "id") Long FaqId) {
 		Faq Faq = faqRepository.findById(FaqId)
 				.orElseThrow(() -> new ResourceNotFoundException());

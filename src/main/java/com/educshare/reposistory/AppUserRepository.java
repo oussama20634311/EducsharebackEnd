@@ -7,4 +7,5 @@ import com.educshare.entities.AppUser;
 @RepositoryRestResource
 public interface AppUserRepository extends JpaRepository<AppUser, Long> {
 	public AppUser findByEmail(String email);
+	public AppUser findByEmailAndPassword(String email, String password);
 }

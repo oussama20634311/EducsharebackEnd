@@ -20,26 +20,27 @@ import com.educshare.entities.University;
 import com.educshare.reposistory.UniversityRepository;
 
 @RestController
+@CrossOrigin(origins = "*")
 public class UniversityController {
 	@Autowired
 	UniversityRepository universityRepository;
 
-	@GetMapping(value="/universities")
+	@GetMapping("/universities")
 	public List<University> getAllUniversitys() {
 		return (List<University>) universityRepository.findAll();
 	}
 
-	@PostMapping(value="/universities")
+	@PostMapping("/universities")
 	public University createUniversity(@Valid @RequestBody University university) {
 		return universityRepository.save(university);
 	}
 
-	@GetMapping(value="/universities/{id}")
+	@GetMapping("/universities/{id}")
 	public University getUniversityById(@PathVariable(value = "id") Long UniversityId) {
 		return universityRepository.findById(UniversityId).orElseThrow(() -> new ResourceNotFoundException());
 	}
 
-	@PutMapping(value="/universities/{id}/edit")
+	@PutMapping("/universities/{id}/edit")
 	public University updateUniversity(@PathVariable(value = "id") Long UniversityId,
 			@Valid @RequestBody University UniversityDetails) {
 
@@ -53,7 +54,7 @@ public class UniversityController {
 		return updatedUniversity;
 	}
 
-	@DeleteMapping(value="/universities/{id}")
+	@DeleteMapping("/universities/{id}")
 	public ResponseEntity<?> deleteUniversity(@PathVariable(value = "id") Long UniversityId) {
 		University University = universityRepository.findById(UniversityId)
 				.orElseThrow(() -> new ResourceNotFoundException());

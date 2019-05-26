@@ -27,22 +27,22 @@ public class MatterController {
 	@Autowired
 	MatterRepository matterRepository;
 
-	@GetMapping(value="/matters")
+	@GetMapping("/matters")
 	public List<Matter> getAllMatters() {
 		return (List<Matter>) matterRepository.findAll();
 	}
 
-	@PostMapping(value="/matters")
+	@PostMapping("/matters")
 	public Matter createMatter(@Valid @RequestBody Matter matter) {
 		return matterRepository.save(matter);
 	}
 
-	@GetMapping(value="/matters/{id}")
+	@GetMapping("/matters/{id}")
 	public Matter getMatterById(@PathVariable(value = "id") Long MatterId) {
 		return matterRepository.findById(MatterId).orElseThrow(() -> new ResourceNotFoundException());
 	}
 
-	@PutMapping(value="/matters/{id}/edit")
+	@PutMapping("/matters/{id}/edit")
 	public Matter updateMatter(@PathVariable(value = "id") Long MatterId, @Valid @RequestBody Matter MatterDetails) {
 
 		Matter Matter = matterRepository.findById(MatterId).orElseThrow(() -> new ResourceNotFoundException());
@@ -52,7 +52,7 @@ public class MatterController {
 		return updatedMatter;
 	}
 
-	@DeleteMapping(value="/matters/{id}")
+	@DeleteMapping("/matters/{id}")
 	public ResponseEntity<?> deleteDepartement(@PathVariable(value = "id") Long MatterId) {
 		Matter Matter = matterRepository.findById(MatterId).orElseThrow(() -> new ResourceNotFoundException());
 		matterRepository.delete(Matter);

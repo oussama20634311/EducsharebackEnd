@@ -28,22 +28,22 @@ public class CourseController {
 	@Autowired
 	CourseRepository courseRepository;
 
-	@GetMapping(value="/courses")
+	@GetMapping("/courses")
 	public List<Course> getAllCourse() {
 		return (List<Course>) courseRepository.findAll();
 	}
 
-	@PostMapping(value="/courses")
+	@PostMapping("/courses")
 	public Course getCourseById(@Valid @RequestBody Course course) {
 		return courseRepository.save(course);
 	}
 
-	@GetMapping(value="/courses/{id}")
+	@GetMapping("/courses/{id}")
 	public Course getCourseById(@PathVariable(value = "id") Long courseId) {
 		return courseRepository.findById(courseId).orElseThrow(() -> new ResourceNotFoundException());
 	}
 
-	@PutMapping(value="/courses/{id}/edit")
+	@PutMapping("/courses/{id}/edit")
 	public Course updateDepartement(@PathVariable(value = "id") Long CourseId,
 			@Valid @RequestBody Course CourseDetails) {
 
@@ -55,7 +55,7 @@ public class CourseController {
 		return updatedCourse;
 	}
 
-	@DeleteMapping(value="/courses/{id}")
+	@DeleteMapping("/courses/{id}")
 	public ResponseEntity<?> deleteUserType(@PathVariable(value = "id") Long userTypeId) {
 
 		Course course = courseRepository.findById(userTypeId).orElseThrow(() -> new ResourceNotFoundException());

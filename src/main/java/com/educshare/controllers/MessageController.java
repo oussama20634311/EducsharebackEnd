@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,24 +20,25 @@ import com.educshare.reposistory.MessageRepository;
 
 
 @RestController
+@CrossOrigin(origins = "*")
 public class MessageController {
 
 	@Autowired
 	MessageRepository messageRepository;
 
 
-	@GetMapping(value="/messages")
+	@GetMapping("/messages")
 	public List<Message> getAllMessages() {
 		return (List<Message>) messageRepository.findAll();
 	}
 
 		
-	@PostMapping(value="/messages")
+	@PostMapping("/messages")
 	public Message createMessage(@Valid @RequestBody Message message) {
 		return messageRepository.save(message);
 	}
 	
-	@GetMapping(value="/messages/{id}")
+	@GetMapping("/messages/{id}")
 	public Message getMessageById(@PathVariable(value = "id") Long MessageId) {
 		return messageRepository.findById(MessageId)
 				.orElseThrow(() -> new ResourceNotFoundException());
@@ -44,7 +46,7 @@ public class MessageController {
 
 	
 	// Delete a Message
-	@DeleteMapping(value="/messages/{id}")
+	@DeleteMapping("/messages/{id}")
 	public ResponseEntity<?> deleteMessage(@PathVariable(value = "id") Long MessageId) {
 		Message Message = messageRepository.findById(MessageId)
 				.orElseThrow(() -> new ResourceNotFoundException());
